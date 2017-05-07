@@ -1,0 +1,16 @@
+
+# The next line updates PATH for the Google Cloud SDK.
+#if [ -f '/home/idxp/video_processing/final/google-cloud-sdk/path.bash.inc' ]; then source '/home/idxp/video_processing/final/google-clo#ud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+#if [ -f '/home/idxp/video_processing/final/google-cloud-sdk/completion.bash.inc' ]; then source '/home/idxp/video_processing/final/goog#le-cloud-sdk/completion.bash.inc'; fi
+
+
+PATH=/Library/Frameworks/Python.framework/Versions/2.7/bin:$PATH
+export PATH
+
+# needed for virtualenvwrapper
+export WORKON_HOME=$HOME/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+
+GOOGLE_APPLICATION_CREDENTIALS="/Desktop/imageApi/MyProject-9491ae3e2ed7.json"

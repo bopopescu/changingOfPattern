@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+	<title>
+		color %
+	</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var json1 = {
+    "dominantColors": {
+      "colors": [
+        {
+          "color": {
+            "red": 221,
+            "green": 189,
+            "blue": 94
+          },
+          "score": 0.1677272,
+          "pixelFraction": 0.009750812
+        },
+        {
+          "color": {
+            "red": 182,
+            "green": 152,
+            "blue": 60
+          },
+          "score": 0.107546724,
+          "pixelFraction": 0.009596038
+        },
+        {
+          "color": {
+            "red": 150,
+            "green": 120,
+            "blue": 33
+          },
+          "score": 0.09320881,
+          "pixelFraction": 0.005571893
+        },
+        {
+          "color": {
+            "red": 142,
+            "green": 118,
+            "blue": 63
+          },
+          "score": 0.087646574,
+          "pixelFraction": 0.053397305
+        },
+        {
+          "color": {
+            "red": 129,
+            "green": 117,
+            "blue": 90
+          },
+          "score": 0.07854835,
+          "pixelFraction": 0.1314038
+        },
+        {
+          "color": {
+            "red": 150,
+            "green": 104,
+            "blue": 20
+          },
+          "score": 0.06587719,
+          "pixelFraction": 0.0029407213
+        },
+        {
+          "color": {
+            "red": 171,
+            "green": 147,
+            "blue": 89
+          },
+          "score": 0.0464218,
+          "pixelFraction": 0.06314812
+        },
+        {
+          "color": {
+            "red": 164,
+            "green": 151,
+            "blue": 118
+          },
+          "score": 0.03943979,
+          "pixelFraction": 0.12118867
+        },
+        {
+          "color": {
+            "red": 100,
+            "green": 85,
+            "blue": 57
+          },
+          "score": 0.03939548,
+          "pixelFraction": 0.09255533
+        },
+        {
+          "color": {
+            "red": 126,
+            "green": 116,
+            "blue": 111
+          },
+          "score": 0.038253345,
+          "pixelFraction": 0.06841046
+        }
+      ]
+    }
+  }
+
+		 var json2 = {
+    "dominantColors": {
+      "colors": [
+        {
+          "color": {
+            "red": 92,
+            "green": 26,
+            "blue": 29
+          },
+          "score": 0.09233525,
+          "pixelFraction": 0.0038521604
+        },
+        {
+          "color": {
+            "red": 42,
+            "green": 55,
+            "blue": 24
+          },
+          "score": 0.06628252,
+          "pixelFraction": 0.13534617
+        },
+        {
+          "color": {
+            "red": 47,
+            "green": 13,
+            "blue": 18
+          },
+          "score": 0.059643358,
+          "pixelFraction": 0.009370119
+        },
+        {
+          "color": {
+            "red": 79,
+            "green": 96,
+            "blue": 36
+          },
+          "score": 0.042678874,
+          "pixelFraction": 0.08839146
+        },
+        {
+          "color": {
+            "red": 248,
+            "green": 228,
+            "blue": 205
+          },
+          "score": 0.02396842,
+          "pixelFraction": 0.0032274856
+        },
+        {
+          "color": {
+            "red": 226,
+            "green": 185,
+            "blue": 171
+          },
+          "score": 0.023834728,
+          "pixelFraction": 0.0029151484
+        },
+        {
+          "color": {
+            "red": 151,
+            "green": 145,
+            "blue": 139
+          },
+          "score": 0.020152068,
+          "pixelFraction": 0.14429985
+        },
+        {
+          "color": {
+            "red": 80,
+            "green": 41,
+            "blue": 29
+          },
+          "score": 0.07860108,
+          "pixelFraction": 0.0056220717
+        },
+        {
+          "color": {
+            "red": 75,
+            "green": 39,
+            "blue": 44
+          },
+          "score": 0.051575813,
+          "pixelFraction": 0.0055179596
+        },
+        {
+          "color": {
+            "red": 65,
+            "green": 4,
+            "blue": 6
+          },
+          "score": 0.047324996,
+          "pixelFraction": 0.0017699115
+        }
+      ]
+    }
+  }
+
+  	var j1 = [];
+  	var j2 = [];
+  	//Convert data to more legible format
+  	for (var i = 0; i < json1.dominantColors.colors.length; i++)
+  	{
+  		colorData = json1.dominantColors.colors[i];
+  		//If color is less than 5% dominant, ignore it
+  		//if(colorData.score < 0.01) continue;
+  		j1.push({"r": colorData.color.red, "g": colorData.color.green, "b": colorData.color.blue, "score":colorData.score})
+  	}
+
+  	for (var i = 0; i < json2.dominantColors.colors.length; i++)
+  	{
+  		colorData = json2.dominantColors.colors[i];
+  		//if(colorData.score < 0.01) continue;
+  		j2.push({"r": colorData.color.red, "g": colorData.color.green, "b": colorData.color.blue, "score":colorData.score})
+  	}
+
+  	//Order array elements by dominant color score
+  	var orderByScore = function(a, b)
+  	{
+  		if (a.score > b.score) return 1;
+  		if (a.score < b.score) return -1;
+  		return 0;
+  	}
+  	j1.sort(orderByScore);
+  	j2.sort(orderByScore);
+
+  	//Loop through array with lowest amount of dominant colors to avoid index out of bounds
+  	var loopLength = j1.length > j2.length ? j2.length : j1.length;
+
+	//Get total score of colors that were not discarded
+	j1scoreTotal = 0;
+  	for (var l = 0; l < loopLength; l++)
+  	{
+  		j1scoreTotal += j1[l].score;
+  	}
+  	j2scoreTotal = 0;
+  	for (var m = 0; m < loopLength; m++)
+  	{
+  		j2scoreTotal += j2[m].score;
+  	}
+  	//Scale remaining score values so they add to 100%
+  	for (var n = 0; n < loopLength; n++)
+  	{
+  		j1[n].score = j1[n].score/j1scoreTotal;
+  	}
+	for (var o = 0; o < loopLength; o++)
+  	{
+  		j2[o].score = j2[o].score/j2scoreTotal;
+  	}
+
+  	//Calculate how different the colors are
+  	var colorDistance = function(c1, c2)
+  	{
+        var d = 0;
+        d += (c1.r - c2.r)*(c1.r - c2.r);
+        d += (c1.g - c2.g)*(c1.g - c2.g);
+        d += (c1.b - c2.b)*(c1.b - c2.b);
+        //441 is highest possible difference so divide by it to get color difference percentage
+        return Math.sqrt(d)/441;
+  	}
+  	var difference = 0;
+  	for (var j = 0; j < loopLength; j++)
+  	{
+  		difference += Math.abs(j1[j].score*(1+colorDistance(j1[j], j2[j])) - j2[j].score);
+  	}
+  	console.log(difference*100+"%");
+	</script>
+</body>
+</html>
